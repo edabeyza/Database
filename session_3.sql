@@ -37,7 +37,7 @@ SELECT COUNT(*) AS 'Kayit Sayisi' FROM Album
 
 SELECT COUNT(AlbumId) FROM "Album" -- *'a göre daha performanslı çalışır
 
---*SUM: Toplam
+--* SUM: Toplam
 SELECT SUM(Total) FROM Invoice
 
 --aşağıdakiyle aynı işlemi daha kısa yoldan yapar
@@ -47,6 +47,24 @@ SELECT * FROM Invoice WHERE "BillingCountry" = "USA" OR "BillingCountry" = "Cana
 
 SELECT * FROM Invoice WHERE "BillingCountry" IN ("USA", "Canada")
 
+--* AVG: Ortalama
 
+SELECT AVG(Total) FROM "Invoice"
+
+--* MIN: Minimum Değer
+
+SELECT MIN(Total) FROM "Invoice"
+
+--* MAX: Maksimum Değer
+
+SELECT MAX(Total) FROM "Invoice"
+
+--* ROUND: Yuvarlama
+
+SELECT ROUND(AVG(Total), 2) FROM Invoice
+
+--* LENGHT: Karakter sayısı(Kayıt sayısını tek satıra düşürmez. Her kaydın karakter sayısını aynı satıra yazar.)
+
+SELECT Title, lenght("Title") FROM Album
 
 
