@@ -79,7 +79,7 @@ SELECT * FROM Invoice WHERE BillingCountry = 'USA';
 
 SELECT DISTINCT(BillingCountry) FROM Invoice
 
-SELECT BillingCountry, count(InvoiceId) FROM Invoice GROUP BY BillingCountry;
+SELECT BillingCountry, COUNT(InvoiceId) FROM Invoice GROUP BY BillingCountry;
 
 SELECT BillingCountry, 
     COUNT(InvoiceId) AS faturaSayisi,
@@ -103,5 +103,9 @@ INSERT INTO Genre (GenreId, Name) VALUES (26, 'Halk Müziği')
 
 INSERT INTO Genre (GenreId, Name) VALUES (27, 'Turk Halk Müziği'),(28, 'Pop Müziği')
 
+-- Tehlikeli Komutlar (DELETE, UPDATE)
 
+UPDATE Genre SET Name = 'Türk Pop Müziği' WHERE GenreId = 30
+
+DELETE FROM Genre WHERE GenreId = 28
 
