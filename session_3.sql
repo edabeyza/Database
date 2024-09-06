@@ -109,3 +109,9 @@ UPDATE Genre SET Name = 'Türk Pop Müziği' WHERE GenreId = 30
 
 DELETE FROM Genre WHERE GenreId = 28
 
+DELETE FROM Genre
+
+UPDATE Track SET Milliseconds = 0
+
+SELECT * FROM Track
+
