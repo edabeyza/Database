@@ -1,4 +1,4 @@
--- Active: 1723840243090@@127.0.0.1@3306
+-- Active: 1725647572612@@127.0.0.1@5432@test_db
 SELECT * FROM Album
 
 SELECT * FROM "Artist";
@@ -65,9 +65,43 @@ SELECT ROUND(AVG(Total), 2) FROM Invoice
 
 --* LENGHT: Karakter sayısı(Kayıt sayısını tek satıra düşürmez. Her kaydın karakter sayısını aynı satıra yazar.)
 
-SELECT Title, lenght("Title") FROM Album
+SELECT Title, length("Title") FROM Album
 
 -------------------------------------- Postgre SQL ---------------------------------------
 
 SELECT * FROM Album
+
+SELECT Title, length(Title) FROM Album;
+
+SELECT * FROM Invoice;
+
+SELECT * FROM Invoice WHERE BillingCountry = 'USA';
+
+SELECT DISTINCT(BillingCountry) FROM Invoice
+
+SELECT BillingCountry, count(InvoiceId) FROM Invoice GROUP BY BillingCountry;
+
+SELECT BillingCountry, 
+    COUNT(InvoiceId) AS faturaSayisi,
+    SUM(Total) AS toplam,
+    MIN(Total) AS minimum,
+    MAX(Total) AS maximum,
+    ROUND(AVG(Total), 2) AS ortalama
+FROM Invoice
+GROUP BY BillingCountry
+
+--------------------------- CRUD -----------------------------
+
+INSERT -- Yeni Kayıt > C
+SELECT -- Sorgu > R
+UPDATE -- Güncelleme > U
+DELETE -- Silme > D
+
+SELECT * FROM Genre
+
+INSERT INTO Genre (GenreId, Name) VALUES (26, 'Halk Müziği')
+
+INSERT INTO Genre (GenreId, Name) VALUES (27, 'Turk Halk Müziği'),(28, 'Pop Müziği')
+
+
 
