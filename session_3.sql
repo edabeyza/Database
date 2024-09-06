@@ -67,4 +67,6 @@ SELECT ROUND(AVG(Total), 2) FROM Invoice
 
 SELECT Title, lenght("Title") FROM Album
 
+-------------------------------------- Postgre SQL ---------------------------------------
 
+SELECT Title
