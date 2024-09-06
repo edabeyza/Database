@@ -70,3 +70,4 @@ SELECT Title, lenght("Title") FROM Album
 -------------------------------------- Postgre SQL ---------------------------------------
 
 SELECT * FROM Album
+
