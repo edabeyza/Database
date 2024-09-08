@@ -50,5 +50,5 @@ If you would like to contribute to this project, you can submit pull requests or
 3. Review your changes and submit a pull request.
 
 ## License
-This project is licensed under the MIT License.
+This project is licensed under the [MIT License](LISENCE).
 
