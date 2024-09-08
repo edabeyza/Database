@@ -1,23 +1,23 @@
--- Bu bir yorum satırı
+-- This is a comment line
 /*
-	MultiLine 
-	Comment
+    MultiLine 
+    Comment
 */
 
--- SELECT 1 AS one -- Tek block işlemlerde sonuna ; koyma zorunda değiliz.
--- SELECT 1 AS one;-- Komuttan sonra yorum için -- kullanabiliriz
+-- SELECT 1 AS one -- In single block statements, you don't need to add a ; at the end.
+-- SELECT 1 AS one; -- You can use -- for comments after the command
 
--- SELECT 1 AS, /* araya yorum yazabiliriz */ 2 AS two;
+-- SELECT 1 AS, /* you can write comments in between */ 2 AS two;
 
 -- NOT CaseSensitive (Case-Insensitive)
--- Büyük harf, küçük harf ayrımı yapmaz.
+-- There is no distinction between uppercase and lowercase.
 -- SELECT 1 AS one;
 -- select 1 AS one;
 
---* Piyasa Standartları:
---** SQL Temel komutları BÜYÜK harfle yazılır. SELECT * FROM ... WHERE
---** String verilerde tek veya çift tırnak kullanabilirz. Piyasa standartı tek tırnaktır. SELECT 'STRİNG'AS one;
---** Her bir temel komut ayrı satıra yazılır.
+--* Market Standards:
+--** SQL basic commands are written in UPPERCASE. SELECT * FROM ... WHERE
+--** For string data, you can use either single or double quotes. Market standard is single quotes. SELECT 'STRING' AS one;
+--** Each basic command is written on a separate line.
 /*
 SELECT*
 FROM tableName
@@ -27,17 +27,17 @@ ORDER BY ...
 
 ----- SQL -----
 
---* SELECT - Seç ve getir
---* FROM - Hangi tablodan?
--- SELECT * FROM Album; --* = Tüm Sütunlar
--- SELECT AlbumId, Title FROM Album; -- İstediğim sütunları getir. -- Tavsiye edilen yöntem tek-tek yazmaktır.
+--* SELECT - Select and retrieve
+--* FROM - From which table?
+-- SELECT * FROM Album; --* = All Columns
+-- SELECT AlbumId, Title FROM Album; -- Retrieve the columns I want. -- Recommended method is to write them one by one.
 
---*AS - Tablo ve sütunları (geçici olarak) adlandırmak için kullanılır. -- Lakap takma
+--* AS - Used to temporarily name tables and columns. -- Nicknaming
 -- SELECT 3 AS number;
--- SELECT 'string' AS baslik;
--- SELECT 1+2 AS toplam; -- Sütun İsimlendirme
--- SELECT AlbumId AS Numara, Title AS Baslik FROM Album;
--- SELECT AlbumId+3 AS Numara, Title AS Baslik FROM Album;
--- SELECT Album.AlbumId+3 AS Numara, Album.Title AS Baslik FROM Album;
--- SELECT a.AlbumId+3 AS Numara, a.Title AS Baslik FROM Album AS a; -- Tablo İsimleri
--- SELECT a.AlbumId+3 Numara, a.Title Baslik FROM Album a; -- AS yazmadan (boşluk bırakarak) isimlendirme yapabiliriz.
+-- SELECT 'string' AS title;
+-- SELECT 1+2 AS total; -- Column Naming
+-- SELECT AlbumId AS Number, Title AS Title FROM Album;
+-- SELECT AlbumId+3 AS Number, Title AS Title FROM Album;
+-- SELECT Album.AlbumId+3 AS Number, Album.Title AS Title FROM Album;
+-- SELECT a.AlbumId+3 AS Number, a.Title AS Title FROM Album AS a; -- Table Names
+-- SELECT a.AlbumId+3 Number, a.Title Title FROM Album a; -- Naming without AS (by leaving space)

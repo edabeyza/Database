@@ -12,24 +12,23 @@ FROM tableName -- BNF Form
 -- SELECT DISTINCT BillingCountry FROM Invoice;
 -- SELECT DISTINCT BillingCountry, BillingCity FROM Invoice;
 
-
--- WHERE şart ( =, >, <, !=, <>, >=, <=, BETWEEN, AND, OR, NOT, NOT IN )
--- SELECT * FROM table WHERE koşul/koşullar
+-- WHERE condition ( =, >, <, !=, <>, >=, <=, BETWEEN, AND, OR, NOT, NOT IN )
+-- SELECT * FROM table WHERE condition/conditions
 
 /*
 SELECT *
 FROM Invoice
-WHERE BillingCountry = 'Germany'; -- Veri şart cümleciği içerisindeyse case sensitive
+WHERE BillingCountry = 'Germany'; -- Case sensitive if within data condition clause
 */
 
--- Fatura miktarı 5 ten büyük olanlar
+-- Invoices with total amount greater than 5
 /*
 SELECT *
 FROM Invoice
 WHERE Total >=5 ; 
 */
 
--- Fatura miktarı 5 ile 8 arasında olanlar
+-- Invoices with total amount between 5 and 8
 /*
 SELECT *
 FROM Invoice
@@ -40,7 +39,7 @@ FROM Invoice
 WHERE Total BETWEEN 5 AND 7.96;
 */
 
--- BETWEEN sadece tarihlerle ilgili sıkıntı oluşturabiliyor
+-- BETWEEN can cause issues with dates
 /*
 SELECT *
 FROM Invoice
@@ -53,126 +52,125 @@ FROM Invoice
 WHERE BillingCountry LIKE 'Germany';
 */
 
--- Ülkesi G ile başlayan
+-- Countries starting with G
 /*
 SELECT *
 FROM Invoice
 WHERE BillingCountry LIKE 'G%';
 */
 
--- Sonu y ile biten ülkelere kesilen faturalar
+-- Invoices for countries ending with y
 /*
 SELECT *
 FROM Invoice
 WHERE BillingCountry LIKE '%y';
 */
 
--- İçinde w olan ülkelere kesilen faturalar
+-- Invoices for countries containing w
 /*
 SELECT *
 FROM Invoice
 WHERE BillingCountry LIKE '%w%';
 */
 
--- İlk karakter önemli değil ikinci karakteri o olan ülkeler
+-- Countries where the second character is o (first character doesn't matter)
 /*
 SELECT *
 FROM Invoice
 WHERE BillingCountry LIKE '_o%';
 */
 
--- Üçüncü harfi r son harfi y olan ülkeler
+-- Countries where the third letter is r and the last letter is y
 /*
 SELECT *
 FROM Invoice
 WHERE BillingCountry LIKE '__r%y';
 */
 
--- Ülkesi norway ve swede olmayan ülkelere kesilen faturalar
+-- Invoices for countries not Norway and Swede
 /*
 SELECT *
 FROM Invoice
 WHERE BillingCountry NOT IN ('Norway', 'Swede');
 */
 
-
 -- LIMIT 
 /* SELECT * FROM Invoice LIMIT 10 */
 
 
--- ORDER BY (ASC -> artan, DESC -> azalan) default ASC
+-- ORDER BY (ASC -> ascending, DESC -> descending) default ASC
 /* SELECT * FROM Invoice ORDER BY BillingCountry ASC; */
 /* SELECT * FROM Invoice ORDER BY BillingCountry ASC; */
 
--- Ülke ismine göre artan şehire göre azalan
+-- Ascending by country name, descending by city
 /* SELECT BillingCountry, BillingCity FROM Invoice ORDER BY BillingCountry, BillingCity DESC; */
 
 
---Examples
--- Track tablosundan AC DC grubunun ilk 5 parçasını getir
+-- Examples
+-- Retrieve the first 5 tracks by AC DC from the Track table
 /* SELECT * FROM Track WHERE composer = 'AC/DC' LIMIT 5 */
--- Son 3
+-- Last 3
 -- SELECT * FROM Track WHERE composer = 'AC/DC' ORDER BY TrackId DESC LIMIT 3
 
 
 -- FUNCTIONS SELECT min, max, avg, sum, round, length FROM
--- Fonksiyonlar tek değer döndürüyor
+-- Functions return a single value
 
--- Tüm faturalarda
+-- Total amount of all invoices
 -- SELECT * FROM Invoice;
--- Toplam fatura miktarı
--- SELECT SUM(Total) toplamFaturaMiktari FROM Invoice;
+-- Total invoice amount
+-- SELECT SUM(Total) totalInvoiceAmount FROM Invoice;
 
--- En düşük, en yüksek ve ortalama fatura miktarını getiriniz
--- SELECT MIN(Total) minFatura, MAX(Total) maxFatura, ROUND(AVG(Total), 2) avgFatura FROM Invoice;
+-- Find the lowest, highest, and average invoice amounts
+-- SELECT MIN(Total) minInvoice, MAX(Total) maxInvoice, ROUND(AVG(Total), 2) avgInvoice FROM Invoice;
 
---  SELECT length(BillingAdress) FROM Invoice;
+--  SELECT length(BillingAddress) FROM Invoice;
 
--- AC DC en kısa süreli parçası ile en uzun süreli parçasını bulunuz
+-- Find AC DC's shortest and longest tracks
 -- SELECT * FROM Track WHERE Composer='AC/DC' ORDER BY Milliseconds ASC LIMIT 1;
 -- SELECT * FROM Track WHERE Composer='AC/DC' ORDER BY Milliseconds DESC LIMIT 1;
 
 -- Version 2
--- En sonda ne varsa onun kaydını getirir. yani max çalışır
--- SELECT MIN(Milliseconds), MAX(Milliseconds), FROM Track WHERE Composer='AC/DC';
+-- Retrieves the record with the highest value at the end. So, max works
+-- SELECT MIN(Milliseconds), MAX(Milliseconds) FROM Track WHERE Composer='AC/DC';
 
 
 -- GROUP BY
 
--- Fatura kesilen ülkeye göre grupla
+-- Group by the country where the invoice was issued
 -- SELECT * FROM Invoice GROUP BY BillingCountry;
 
--- Her bir ülke için kesilen ort fatura miktarı
+-- Average invoice amount for each country
 -- SELECT BillingCountry, avg(total) FROM Invoice GROUP BY BillingCountry;
 
 
 -- SUBQUERY
 
--- Ortalama fatura miktarı 6.0
+-- Average invoice amount 6.0
 -- SELECT ROUND(AVG(Total)) from Invoice;
 
--- Ortalama fatura miktarı miktarından yüksek kesilen faturalar
+-- Invoices with amounts greater than the average invoice amount
 -- SELECT * FROM Invoice WHERE Total>6.0;
 -- SELECT * FROM Invoice WHERE Total>(SELECT ROUND(AVG(Total)) from Invoice);
 
--- Big Ones albümünün parçaları?
--- İlk önce "big ones" albümünün bilgilerini bul
--- içinden album id sini al
--- track tablosunda album id si yukarıda elde ettiğimiz id olanları listele
+-- Tracks from the "Big Ones" album?
+-- First find information about the "Big Ones" album
+-- Get the album id
+-- List tracks with the album id obtained above
 -- SELECT * FROM Album WHERE Title='Big Ones';
 -- SELECT AlbumId FROM Album WHERE Title='Big Ones';
 -- SELECT * FROM Track WHERE AlbumId=(SELECT AlbumId FROM Album WHERE Title='Big Ones');
 
--- Mark Philips için kesilen faturaları bulunuz?
--- İlk önce "mark philips" in customer id sini bul
--- faturalar tablosundan customer id si yukarıda elde ettiğimiz id olan faturaları listele
+-- Find invoices issued for Mark Philips?
+-- First find Mark Philips's customer id
+-- List invoices with the customer id obtained above
 -- SELECT * FROM Invoice WHERE CustomerId=(SELECT CustomerId FROM Customer WHERE FirstName='Mark' AND LastName='Philips');
 
--- JOIN: İki tabloyu birleştirme (DEFAULT: Inner Join)
--- LEFT JOIN: A(sol) Tablosundai her şeyi alır B(sağ) tablosunda sadece eşleşenleri alır.
--- INNER JOIN: Her iki tabloda da eşleşenleri alır yani kesişim kümesini alır.
--- RIGHT JOIN: Sağdaki tablonun hepsini alır, solda ise eşleşenleri alır.
+-- JOIN: Combine two tables (DEFAULT: Inner Join)
+-- LEFT JOIN: Takes everything from the left (A) table and only matching rows from the right (B) table.
+-- INNER JOIN: Takes matching rows from both tables, i.e., the intersection.
+-- RIGHT JOIN: Takes everything from the right (B) table and only matching rows from the left (A) table.
 
--- Her bir albüm ve albümün ait olduğu artist bilgilerini getir
--- SELECT * FROM Album LEFT JOIN Artist on Album.ArtistId = Artist.Artist.Id;
--- SELECT * FROM Artist LEFT JOIN Album on Album.ArtistId = Artist.Artist.Id;
+-- Retrieve each album and the artist information associated with it
+-- SELECT * FROM Album LEFT JOIN Artist on Album.ArtistId = Artist.ArtistId;
+-- SELECT * FROM Artist LEFT JOIN Album on Album.ArtistId = Artist.ArtistId;

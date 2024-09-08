@@ -17,53 +17,53 @@ SELECT * FROM Customer AS "c" JOIN Invoice i ON "c".CustomerId = i.CustomerId
 
 SELECT "c".Customer, "c".FirstName, "c".LastName, i.Total FROM Customer AS "c" JOIN Invoice i ON "c".CustomerId = i.CustomerId
 
-SELECT * FROM Album AS a LEFT JOIN Artist r ON a.ArtistId = r.ArtistId -- soldaki tabloya göre
+SELECT * FROM Album AS a LEFT JOIN Artist r ON a.ArtistId = r.ArtistId -- Based on the left table
 
-SELECT * FROM Album AS a RIGHT JOIN Artist r ON a.ArtistId = r.ArtistId -- sağdaki tabloya göre 
+SELECT * FROM Album AS a RIGHT JOIN Artist r ON a.ArtistId = r.ArtistId -- Based on the right table
 
 SELECT a.AlbumId, a.Title, r.Name AS ArtistName 
     FROM Album AS a INNER JOIN Artist r ON a.ArtistId = r.ArtistId 
-        ORDER BY r.Name ASC -- asc küçükten büyüğe sıralar
-                            -- desc büyükten küçüğe sıralar
+        ORDER BY r.Name ASC -- ASC orders from smallest to largest
+                            -- DESC orders from largest to smallest
 
 --- FUNCTIONS ---
---* COUNT: kayıt sayısı
+--* COUNT: Number of records
 
-SELECT COUNT(*) AS "Kayit Sayisi" FROM Album
+SELECT COUNT(*) AS "Record Count" FROM Album
 
-SELECT COUNT(*) AS `Kayit Sayisi` FROM Album
+SELECT COUNT(*) AS `Record Count` FROM Album
 
-SELECT COUNT(*) AS 'Kayit Sayisi' FROM Album
+SELECT COUNT(*) AS 'Record Count' FROM Album
 
-SELECT COUNT(AlbumId) FROM "Album" -- *'a göre daha performanslı çalışır
+SELECT COUNT(AlbumId) FROM "Album" -- More efficient than using *
 
---* SUM: Toplam
+--* SUM: Total
 SELECT SUM(Total) FROM Invoice
 
---aşağıdakiyle aynı işlemi daha kısa yoldan yapar
+-- Achieves the same result more concisely
 SELECT * FROM Invoice WHERE BillingCountry IN ('USA', 'Canada')
 
 SELECT * FROM Invoice WHERE "BillingCountry" = "USA" OR "BillingCountry" = "Canada"
 
 SELECT * FROM Invoice WHERE "BillingCountry" IN ("USA", "Canada")
 
---* AVG: Ortalama
+--* AVG: Average
 
 SELECT AVG(Total) FROM "Invoice"
 
---* MIN: Minimum Değer
+--* MIN: Minimum Value
 
 SELECT MIN(Total) FROM "Invoice"
 
---* MAX: Maksimum Değer
+--* MAX: Maximum Value
 
 SELECT MAX(Total) FROM "Invoice"
 
---* ROUND: Yuvarlama
+--* ROUND: Rounding
 
 SELECT ROUND(AVG(Total), 2) FROM Invoice
 
---* LENGHT: Karakter sayısı(Kayıt sayısını tek satıra düşürmez. Her kaydın karakter sayısını aynı satıra yazar.)
+--* LENGTH: Number of characters (Does not reduce the record count to one line. Shows the number of characters for each record on the same line.)
 
 SELECT Title, length("Title") FROM Album
 
@@ -82,30 +82,30 @@ SELECT DISTINCT(BillingCountry) FROM Invoice
 SELECT BillingCountry, COUNT(InvoiceId) FROM Invoice GROUP BY BillingCountry;
 
 SELECT BillingCountry, 
-    COUNT(InvoiceId) AS faturaSayisi,
-    SUM(Total) AS toplam,
+    COUNT(InvoiceId) AS invoiceCount,
+    SUM(Total) AS total,
     MIN(Total) AS minimum,
     MAX(Total) AS maximum,
-    ROUND(AVG(Total), 2) AS ortalama
+    ROUND(AVG(Total), 2) AS average
 FROM Invoice
 GROUP BY BillingCountry
 
 --------------------------- CRUD -----------------------------
 
-INSERT -- Yeni Kayıt > C
-SELECT -- Sorgu > R
-UPDATE -- Güncelleme > U
-DELETE -- Silme > D
+INSERT -- New Record > C
+SELECT -- Query > R
+UPDATE -- Update > U
+DELETE -- Delete > D
 
 SELECT * FROM Genre
 
-INSERT INTO Genre (GenreId, Name) VALUES (26, 'Halk Müziği')
+INSERT INTO Genre (GenreId, Name) VALUES (26, 'Folk Music')
 
-INSERT INTO Genre (GenreId, Name) VALUES (27, 'Turk Halk Müziği'),(28, 'Pop Müziği')
+INSERT INTO Genre (GenreId, Name) VALUES (27, 'Turkish Folk Music'),(28, 'Pop Music')
 
--- Tehlikeli Komutlar (DELETE, UPDATE)
+-- Dangerous Commands (DELETE, UPDATE)
 
-UPDATE Genre SET Name = 'Türk Pop Müziği' WHERE GenreId = 30
+UPDATE Genre SET Name = 'Turkish Pop Music' WHERE GenreId = 30
 
 DELETE FROM Genre WHERE GenreId = 28
 
