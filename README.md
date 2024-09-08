@@ -11,7 +11,7 @@ This repository provides educational materials and practical examples related to
 ## Requirements
 **SQLite:** [Download SQLite](https://sqlitebrowser.org/dl/) <br>
 **PostgreSQL:** [Download PostgreSQL](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads) <br>
-**JDBC Extension for VSCode:** Install from the [VSCode Marketplace].
+**JDBC Extension for VSCode:** Install from the VSCode Marketplace.
 
 ## Installation and Usage
 ### SQLite
@@ -52,3 +52,5 @@ If you would like to contribute to this project, you can submit pull requests or
 ## License
 This project is licensed under the [MIT License](LISENCE).
 
+## Contact
+For inquiries, you can also reach out via my [GitHub profile](https://github.com/edabeyza).
